@@ -1,0 +1,8 @@
+target
+.git
+.github
+node_modules
+template/docker/*.json
+*.log
+**/*.swp
+**/*.swo

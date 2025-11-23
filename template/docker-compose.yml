@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  bootnode:
+    build:
+      context: ".."
+      dockerfile: "Dockerfile"
+    image: ponpes-chain:latest
+    container_name: frontier-bootnode
+    volumes:
+      - ./docker/ponpes-raw.json:/data/ponpes-raw.json:ro
+      - bootnode-data:/data
+    ports:
+      - "30333:30333"
+      - "9944:9944"
+    command:
+      [
+        "--chain",
+        "/data/ponpes-raw.json",
+        "--base-path",
+        "/data/boot",
+        "--name",
+        "bootnode-sudo-validator",
+        "--node-key",
+        "${NODE_KEY_HEX}",
+        "--validator",
+        "--rpc-cors",
+        "all",
+        "--rpc-methods",
+        "safe"
+      ]
+
+  archive_rpc:
+    image: ponpes-chain:latest
+    depends_on:
+      - bootnode
+    container_name: frontier-archive-rpc
+    volumes:
+      - ./docker/ponpes-raw.json:/data/ponpes-raw.json:ro
+      - archive-data:/data
+    ports:
+      - "30334:30333"
+      - "9946:9944"
+    command:
+      [
+        "--chain",
+        "/data/ponpes-raw.json",
+        "--base-path",
+        "/data/archive",
+        "--name",
+        "archive-rpc-1",
+        "--pruning",
+        "archive",
+        "--bootnodes",
+        "${BOOTNODE_MULTIADDR}",
+        "--rpc-cors",
+        "all",
+        "--rpc-methods",
+        "unsafe",
+        "--unsafe-ws-external",
+        "--unsafe-rpc-external"
+      ]
+
+volumes:
+  bootnode-data:
+  archive-data:
