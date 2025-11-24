@@ -148,7 +148,8 @@ pub type Executive = frame_executive::Executive<
 >;
 
 // Time is measured by number of blocks.
-pub const MILLISECS_PER_BLOCK: u64 = 6000;
+// Target 3s blocks for faster inclusion/finality on Ponpes.
+pub const MILLISECS_PER_BLOCK: u64 = 3000;
 pub const SLOT_DURATION: u64 = MILLISECS_PER_BLOCK;
 pub const MINUTES: BlockNumber = 60_000 / (MILLISECS_PER_BLOCK as BlockNumber);
 pub const HOURS: BlockNumber = MINUTES * 60;
@@ -200,8 +201,8 @@ pub fn native_version() -> sp_version::NativeVersion {
 }
 
 const NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(75);
-/// We allow for 2000ms of compute with a 6 second average block time.
-pub const WEIGHT_MILLISECS_PER_BLOCK: u64 = 2000;
+/// We allow for ~1s of compute with a 3 second average block time.
+pub const WEIGHT_MILLISECS_PER_BLOCK: u64 = 1000;
 pub const MAXIMUM_BLOCK_WEIGHT: Weight = Weight::from_parts(
 	WEIGHT_MILLISECS_PER_BLOCK * WEIGHT_REF_TIME_PER_MILLIS,
 	u64::MAX,

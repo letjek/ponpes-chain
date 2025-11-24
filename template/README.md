@@ -110,6 +110,7 @@ A baked-in production spec is available under `--chain production` (name `Ponpes
 - Pre-funded: sudo plus `0x4c7d4515757e7662132ad39abc1a0bb2f5e2c4ca` and `0x9b5a6f19a413f30e7cb35c50a6481d948e57843d`
 - Aura/GRANDPA authorities: keys derived from seeds `//AuthorityOne` and `//AuthorityTwo`
 - Bootnodes: none baked in; keep `bootNodes: []` in your raw spec and pass peers via `--bootnodes` at runtime.
+- Block time: ~3s (runtime `MILLISECS_PER_BLOCK = 3000`, `WEIGHT_MILLISECS_PER_BLOCK = 1000`); rebuild and regenerate specs after this change.
 
 Replace these values with your own keys before going live. Suggested rollout:
 
