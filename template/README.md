@@ -131,8 +131,14 @@ cargo build --release
 - Insert Aura/GRANDPA keys that correspond to one of the seeded authorities:
 
 ```sh
-./target/release/ponpes-chain key insert --chain /tmp/ponpes-raw.json --base-path /var/lib/frontier --scheme Sr25519 --suri "//AuthorityOne" --key-type aura
-./target/release/ponpes-chain key insert --chain /tmp/ponpes-raw.json --base-path /var/lib/frontier --scheme Ed25519 --suri "//AuthorityOne" --key-type gran
+./target/release/ponpes-chain key insert --chain /tmp/ponpes-raw.json --base-path /var/lib/ponpes --scheme Sr25519 --suri "//AuthorityOne" --key-type aura
+./target/release/ponpes-chain key insert --chain /tmp/ponpes-raw.json --base-path /var/lib/ponpes --scheme Ed25519 --suri "//AuthorityOne" --key-type gran
+```
+
+- Also generate node key with:
+
+```sh
+./target/release/ponpes-chain key generate-node-key --base-path /var/lib/ponpes
 ```
 
 - Start the node as a validator (adjust ports/base-path/node name):
@@ -140,7 +146,7 @@ cargo build --release
 ```sh
 ./target/release/ponpes-chain \
   --chain /tmp/ponpes-raw.json \
-  --base-path /var/lib/frontier \
+  --base-path /var/lib/ponpes \
   --name sudo-validator-1 \
   --validator \
   --rpc-cors all \
@@ -154,7 +160,7 @@ cargo build --release
 ```sh
 ./target/release/ponpes-chain \
   --chain /tmp/ponpes-raw.json \
-  --base-path /var/lib/frontier-rpc \
+  --base-path /var/lib/ponpes-rpc \
   --name archive-rpc-1 \
   --pruning archive \
   --rpc-cors all \
@@ -172,8 +178,10 @@ If you only want one validator (also sudo + bootnode) and one archival RPC node:
 - Generate your validator keys (replace `<name>` with a mnemonic or `//AuthorityOne` style phrase):
 
 ```sh
-./target/release/ponpes-chain key generate --scheme Sr25519 --key-type aura --suri "<name>"
-./target/release/ponpes-chain key generate --scheme Ed25519 --key-type gran --suri "<name>"
+## Aura
+./target/release/ponpes-chain key inspect --scheme Sr25519 "<name>"
+## Gran
+./target/release/ponpes-chain key inspect --scheme Ed25519 "<name>"
 ```
 
 - Put the resulting public keys (SS58) into the chain spec JSON under `aura.authorities` (Sr25519) and `grandpa.authorities` (Ed25519, with weight `1`), then rebuild the raw spec:

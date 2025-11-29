@@ -1,9 +1,12 @@
-/target
+target
 **/target
 .DS_Store
 **/ponpes-chain.json
 **/ponpes-chain-raw.json
+**/ponpes-chain.raw.json
 **/ponpes.json
 **/ponpes-raw.json
+**/ponpes.raw.json
 node_modules
 *.log
+**/ponpes/**/*
