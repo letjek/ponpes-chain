@@ -10,3 +10,6 @@ target
 node_modules
 *.log
 **/ponpes/**/*
+compose-sudobootnodevalidator.yaml
+compose-archivalrpc.yaml
+ops/nginx

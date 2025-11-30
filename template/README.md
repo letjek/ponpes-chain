@@ -129,7 +129,17 @@ cargo build --release
 
 3. Prepare the sudo authority node
 - Insert Aura/GRANDPA keys that correspond to one of the seeded authorities:
-
+```sh
+./target/release/ponpes-chain key inspect --scheme ecdsa "//Sudo"
+./target/release/ponpes-chain key inspect --scheme Sr25519 "//AuthorityOne"
+./target/release/ponpes-chain key inspect --scheme Ed25519 "//AuthorityOne"
+./target/release/ponpes-chain key inspect --scheme ecdsa "//AuthorityOne"
+```
+//PonpesChainSudo30b750
+//PonpesChainAuthorityOne30b750
+[
+  "/ip4/159.65.15.52/tcp/30333/p2p/12D3KooWLGbB5YhsNoG1wL8krPYhtp2nrEk1Y8ESE4AoNh4h3zby"
+]
 ```sh
 ./target/release/ponpes-chain key insert --chain /tmp/ponpes-raw.json --base-path /var/lib/ponpes --scheme Sr25519 --suri "//AuthorityOne" --key-type aura
 ./target/release/ponpes-chain key insert --chain /tmp/ponpes-raw.json --base-path /var/lib/ponpes --scheme Ed25519 --suri "//AuthorityOne" --key-type gran

@@ -5,8 +5,8 @@ services:
     build:
       context: ".."
       dockerfile: "Dockerfile"
-    image: ponpes-chain:latest
-    container_name: frontier-bootnode
+    image: dragonglee/ponpes-chain:latest
+    container_name: ponpes-chain
     volumes:
       - ./docker/ponpes-raw.json:/data/ponpes-raw.json:ro
       - bootnode-data:/data
@@ -31,10 +31,10 @@ services:
       ]
 
   archive_rpc:
-    image: ponpes-chain:latest
+    image: dragonglee/ponpes-chain:latest
     depends_on:
       - bootnode
-    container_name: frontier-archive-rpc
+    container_name: ponpes-chain-rpc
     volumes:
       - ./docker/ponpes-raw.json:/data/ponpes-raw.json:ro
       - archive-data:/data

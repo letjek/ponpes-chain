@@ -6,3 +6,7 @@ template/docker/*.json
 *.log
 **/*.swp
 **/*.swo
+**/ponpes/**/*
+compose-sudobootnodevalidator.yaml
+compose-archivalrpc.yaml
+ops/nginx
